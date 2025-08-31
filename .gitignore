@@ -1,0 +1,35 @@
+# Ignore plugin manager content
+plugin/packer_compiled.lua
+plugin/lazy-lock.json
+
+# Mason downloads (LSPs, tools)
+mason/
+.mason/
+
+# Treesitter parser binaries
+parser/
+parsers/
+nvim-treesitter/
+
+# Cache and state
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# Undo/backup history (optional)
+*.un~
+shada/
+session.vim
+Session.vim
+
+# Optional: exclude personal test files
+Ex
+test.lua
+temp.lua
+
+# Node/npm junk if you ever run JS tools
+node_modules/
+package-lock.json
+
