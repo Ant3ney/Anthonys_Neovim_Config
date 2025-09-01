@@ -25,23 +25,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, c
 
   -- Define suppress list: substrings to match against clangd messages
   local suppress_patterns = {
-	  "No matching member function for call to 'CreateDefaultSubobject'",
-	  "Base class '.*' has private copy constructor",
-	  "Cannot initialize return object of type 'UObject %*'",
-	  "with an expression of type 'UDeathEffect'",
-	  "Cannot initialize object parameter of type 'IEnhancedInputSubsystemInterface' with an expression of type 'UEnhancedInputLocalPlayerSubsystem'",
-	  "No viable conversion from 'struct FLogCategoryLogTemp' to 'const FLogCategoryBase'",
-	  "Use of undeclared identifier 'GetController'; did you mean 'AController'",
-	  "Use of undeclared identifier 'Super'",
-	  "Static assertion failed due to requirement 'TIsArrayOrRefOfTypeByPredicate<const wchar_t",
-	  "No member named 'GetCompileTimeVerbosity' in 'FLogCategoryLogTemp'",
-	  "No member named 'IsSuppressed' in 'FLogCategoryLogTemp'",
-	  "Cannot initialize object parameter of type 'IEnhancedInputSubsystemInterface' with an expression of type 'UEnhancedInputLocalPlayerSubsystem'",
-	  "Use of undeclared identifier 'FindComponentByClass'",
-	  "Incomplete type 'ULocalPlayer' named in nested name specifier",
-	  "Out-of-line definition of '%*_Implementation' does not match any declaration in",
-	  "Use of undeclared identifier 'HasAuthority'",
-	  "No member named 'GetComponentByClass' in"
+	  "Suppress nothing"
   }
 
   -- Filter diagnostics
