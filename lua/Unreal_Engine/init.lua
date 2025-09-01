@@ -51,6 +51,8 @@ vim.lsp.config('clangd', {
   root_markers = { 'compile_commands.json', '*.uproject', '.git', '.clangd' },
   capabilities = caps,
 })
+
+require("Unreal_Engine.remap")
+
 print("Configed clangd lsp")
-
-
+print("Finished Configuring Unreal Engine Module")

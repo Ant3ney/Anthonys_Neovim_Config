@@ -11,6 +11,5 @@ vim.cmd [[
 
 vim.opt.clipboard = "unnamedplus"
 
-require("Anthony")
-require("Anthony.remap")
-print("Hello")
+require("Unreal_Engine")
+print("Welcome to Unreal Engine Config")
