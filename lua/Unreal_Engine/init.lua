@@ -52,7 +52,38 @@ vim.lsp.config('clangd', {
   capabilities = caps,
 })
 
+-- Override handler to filter unwanted clangd errors
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+  if not result.diagnostics then return end
+
+  -- Define suppress list: substrings to match against clangd messages
+  local suppress_patterns = {
+	  "Suppress nothing"
+  }
+
+  -- Filter diagnostics
+  local filtered = {}
+  for _, diagnostic in ipairs(result.diagnostics) do
+    local keep = true
+    for _, pat in ipairs(suppress_patterns) do
+      if diagnostic.message:match(pat) then
+        keep = false
+        break
+      end
+    end
+    if keep then
+      table.insert(filtered, diagnostic)
+    end
+  end
+
+  result.diagnostics = filtered
+  vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+end
+
+
+vim.diagnostic.config({signs=true, underline=true, severity_sort=true})
+print("Configed clangd lsp")
+
 require("Unreal_Engine.remap")
 
-print("Configed clangd lsp")
 print("Finished Configuring Unreal Engine Module")
