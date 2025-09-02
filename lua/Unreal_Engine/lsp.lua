@@ -15,7 +15,7 @@ vim.lsp.config('clangd', {
     '--header-insertion=never',
     '--completion-style=detailed',
     '--all-scopes-completion',
-    '--compile-commands-dir=C:/Users/antho/Desktop/AnthonysFolder/Games/pvh_landing/div/03/PVH',
+    '--compile-commands-dir=DevSpace/Anthony',
     '--log=verbose',
     -- MSVC/clang-cl discovery so system includes are resolved:
     '--query-driver=C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/MSVC/*/bin/**/cl.exe;C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/Llvm/bin/clang-cl.exe;C:/Program Files/LLVM/bin/clang-cl.exe',
