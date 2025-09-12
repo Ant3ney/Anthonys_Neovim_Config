@@ -30,6 +30,15 @@ vim.lsp.config('clangd', {
   capabilities = caps,
 })
 
+vim.lsp.config('ts', { 
+	cmd = {
+		'typescript-language-server', '--stdio',
+	},
+	filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	root_markers = { '.git', 'package.json', 'app.js' },
+	capabilities = caps,
+})
+
 -- Override handler to filter unwanted clangd errors
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
   if not result.diagnostics then return end
