@@ -33,3 +33,5 @@ temp.lua
 node_modules/
 package-lock.json
 
+# Ignore testing workspaces
+test_workspace

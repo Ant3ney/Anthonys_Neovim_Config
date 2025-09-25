@@ -39,5 +39,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+require("Unreal_Engine.commands")
 
 print("Finished Configuring Unreal Engine Module")
