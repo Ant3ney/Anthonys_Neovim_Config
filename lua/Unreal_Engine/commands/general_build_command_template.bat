@@ -4,7 +4,8 @@ setlocal
 REM Set project directory and paths
 set PROJECT_DIR=_____@@@PROJECT_DIR@@@_____
 set UBT_PATH=_____@@@UBT_PATH@@@_____
-set UPROJECT_PATH="%PROJECT_DIR%\_____@@@PROJECT_NAME@@@_____.uproject"
+set PROJECT_NAME=_____@@@PROJECT_NAME@@@_____
+set UPROJECT_PATH=%PROJECT_DIR%\%PROJECT_NAME%.uproject
 set LOG_FILE=%PROJECT_DIR%\BuildLog.txt
 
 REM Change to the project directory
@@ -23,7 +24,7 @@ echo. > "%LOG_FILE%"
 
 REM Run UnrealBuildTool via dotnet and log output
 powershell -NoLogo -NoProfile -Command ^
-    "& { dotnet \"\"\"%UBT_PATH%\"\"\" Strafing_SystemEditor Win64 Development -Project=%UPROJECT_PATH% -WaitMutex -FromMsBuild -architecture=x64 2>&1 | Tee-Object -FilePath '%LOG_FILE%' }"
+    "& { dotnet \"\"\"%UBT_PATH%\"\"\" "%PROJECT_NAME%" Win64 Development -Project="%UPROJECT_PATH%" -WaitMutex -FromMsBuild -architecture=x64 2>&1 | Tee-Object -FilePath '%LOG_FILE%' }"
 
 
 endlocal

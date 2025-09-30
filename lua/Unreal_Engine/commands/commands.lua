@@ -24,13 +24,34 @@ function init_UE_nvim_ENV()
 	
 	local test_workspace_dir = get_path_to_this_file() .. "\\test_workspace"
 	local general_build_command_template_dir = get_path_to_this_file() .. "\\general_build_command_template.bat"
-	local general_build_command_template_text = get_general_build_command_template_text(general_build_command_template_dir)
+	local general_build_command_template_text = get_file_text(general_build_command_template_dir)
 
-	new_build_command_template_text = string.gsub(general_build_command_template_text, "_____@@@PROJECT_DIR@@@_____", project_dir)
+	local new_build_command_template_text = string.gsub(general_build_command_template_text, "_____@@@PROJECT_DIR@@@_____", project_dir)
 	new_build_command_template_text = string.gsub(new_build_command_template_text, "_____@@@UBT_PATH@@@_____", ubt_path)
 	new_build_command_template_text = string.gsub(new_build_command_template_text, "_____@@@PROJECT_NAME@@@_____", project_name)
 
 	wright_to_file_and_overide(new_build_command_template_text, project_dir .. "\\Scripts" .. "\\general_build_command.bat")
+
+	local ubt_path_compile_commands = ue_engine_path .. "\\Engine\\Binaries\\DotNET\\UnrealBuildTool\\UnrealBuildTool.exe"
+	local dev_space_dir = project_dir .. "\\DevSpace\\Anthony"
+
+	local compile_commands_build_command_template_dir = get_path_to_this_file() .. "\\compile_commands_build_command_template.bat"
+	local compile_commands_build_command_template_text = get_file_text(compile_commands_build_command_template_dir)
+
+	local new_compile_commands_build_command_template_text = string.gsub(compile_commands_build_command_template_text, "_____@@@PROJECT_DIR@@@_____", project_dir)
+	new_compile_commands_build_command_template_text = string.gsub(new_compile_commands_build_command_template_text, "_____@@@UBT_PATH@@@_____", ubt_path_compile_commands)
+	new_compile_commands_build_command_template_text = string.gsub(new_compile_commands_build_command_template_text, "_____@@@PROJECT_NAME@@@_____", project_name)
+	new_compile_commands_build_command_template_text = string.gsub(new_compile_commands_build_command_template_text, "_____@@@DEV_SPACE_DIR@@@_____", dev_space_dir)
+
+	wright_to_file_and_overide(new_compile_commands_build_command_template_text, project_dir .. "\\Scripts" .. "\\compile_commands_build_command.bat")
+
+
+	local local_nvim_config_template_dir = get_path_to_this_file() .. "\\template.nvim.lua"
+	local local_nvim_config_template_text = get_file_text(local_nvim_config_template_dir)
+
+	local new_local_nvim_config_template_text = string.gsub(local_nvim_config_template_text, "_____@@@PROJECT_NAME@@@_____", project_name)
+
+	wright_to_file_and_overide(new_local_nvim_config_template_text, dev_space_dir .. "\\.nvim.lua")
 end
 
 
@@ -58,7 +79,7 @@ function wright_to_file_and_overide(content, full_file_path)
 end
 
 
-function get_general_build_command_template_text(dir)
+function get_file_text(dir)
 	local file_handle = io.open(dir, "r")
 	local content = file_handle.read(file_handle, "*a")
 	return content
