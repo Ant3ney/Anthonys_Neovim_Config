@@ -21,9 +21,6 @@ end, { desc = "Build editor project (run Scripts/BuildEditorProject.bat)" })
 -- Hotkey: <leader>vb runs UnrealBuildTool to generate clang database
 
 vim.keymap.set("n", "<leader>vb", function()
-  -- Full UnrealBuildTool command + move step
-  local cmd = [["C:\Program Files\Epic Games\UE_5.6\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe" -mode=GenerateClangDatabase -project="C:\Users\antho\Desktop\AnthonysFolder\Games\Strafing_System\Strafing_System.uproject" -game -engine -OutputDir="C:\Users\antho\Desktop\AnthonysFolder\Games\Strafing_System\DevSpace\Anthony" Strafing_SystemEditor Development Win64 && move /Y compile_commands.json DevSpace\Anthony\compile_commands.json]] 
-
   -- Open a new horizontal split terminal running cmd.exe
   vim.cmd("split term://cmd.exe")
 

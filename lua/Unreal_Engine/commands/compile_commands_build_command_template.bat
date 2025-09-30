@@ -10,7 +10,6 @@ set DEV_SPACE_DIR=_____@@@DEV_SPACE_DIR@@@_____
 
 echo 🔧 Starting Compile Commands build... 
 
-REM 
-    "%UBT_PATH%" -mode=GenerateClangDatabase -project="%UPROJECT_PATH%" -game -engine -OutputDir="%DEV_SPACE_DIR%" %PROJECT_NAME%Editor Development Win64 && move /Y "%PROJECT_DIR%\compile_commands.json" "%PROJECT_DIR%\DevSpace\Anthony\compile_commands.json"
+"%UBT_PATH%" -mode=GenerateClangDatabase -project="%UPROJECT_PATH%" -game -engine -OutputDir="%DEV_SPACE_DIR%" %PROJECT_NAME%Editor Development Win64 && move /Y "%PROJECT_DIR%\compile_commands.json" "%PROJECT_DIR%\DevSpace\Anthony\compile_commands.json"
 
 endlocal
