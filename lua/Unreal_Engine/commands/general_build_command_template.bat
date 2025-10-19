@@ -1,30 +1,12 @@
 @echo off
 setlocal
 
-REM Set project directory and paths
-set PROJECT_DIR=_____@@@PROJECT_DIR@@@_____
-set UBT_PATH=_____@@@UBT_PATH@@@_____
-set PROJECT_NAME=_____@@@PROJECT_NAME@@@_____
-set UPROJECT_PATH=%PROJECT_DIR%\%PROJECT_NAME%.uproject
-set LOG_FILE=%PROJECT_DIR%\BuildLog.txt
+rem set project directory and paths
+set project_dir=_____@@@PROJECT_DIR@@@_____
+set ubt_path=_____@@@UBT_PATH@@@_____
+set project_name=_____@@@PROJECT_NAME@@@_____
+set uproject_path=%project_dir%\%project_name%.uproject
 
-REM Change to the project directory
-cd /d "%PROJECT_DIR%"
-
-REM Check if dotnet is installed
-where dotnet >nul 2>&1
-if %ERRORLEVEL% neq 0 (
-    echo ❌ 'dotnet' is not in your PATH. Install the .NET SDK or add it to your PATH.
-    pause
-    exit /b 1
-)
-
-echo 🔧 Starting build... (output will be logged to BuildLog.txt)
-echo. > "%LOG_FILE%"
-
-REM Run UnrealBuildTool via dotnet and log output
-powershell -NoLogo -NoProfile -Command ^
-    "& { dotnet \"\"\"%UBT_PATH%\"\"\" "%PROJECT_NAME%" Win64 Development -Project="%UPROJECT_PATH%" -WaitMutex -FromMsBuild -architecture=x64 2>&1 | Tee-Object -FilePath '%LOG_FILE%' }"
-
+powershell -noprofile -command "dotnet \"\"\"%ubt_path%\"\"\" "%project_name%" win64 development -project="%uproject_path%" -waitmutex -frommsbuild -architecture=x64"
 
 endlocal

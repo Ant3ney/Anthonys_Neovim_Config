@@ -12,4 +12,5 @@ vim.cmd [[
 vim.opt.clipboard = "unnamedplus"
 
 require("Unreal_Engine")
+require("Module_Practice")
 print("Welcome to Unreal Engine Config")

@@ -1,9 +1,6 @@
-
 local uv = vim.loop
 
 local test_delete_me_workspace = "C:\\Users\\antho\\AppData\\Local\\nvim\\lua\\Unreal_Engine\\commands\\test_workspace"
-
-
 
 function init_UE_nvim_ENV() 
 	local project_dir = vim.fn.getcwd()
@@ -59,15 +56,11 @@ vim.api.nvim_create_user_command('UEI', init_UE_nvim_ENV, {})
 
 print("Finished configuring unreal engine commands")
 
-
-
-
-
-
-
 -- ============ Helpers ============
 
 function wright_to_file_and_overide(content, full_file_path)
+
+
 	local stat = uv.fs_stat(full_file_path)
 	if stat then
 		uv.fs_unlink(full_file_path)
@@ -120,7 +113,6 @@ function mkdir_if_not_already_there(full_path_dir)
 		local name, typ = uv.fs_scandir_next(req)
 		if not name then break end
 		if typ == "directory" then
-			print(name .. " vs " .. new_dir_name)
 			if name == new_dir_name then
 				had_new_dir = true
 				break
