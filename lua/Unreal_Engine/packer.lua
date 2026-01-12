@@ -47,4 +47,63 @@ return require("packer").startup(function(use)
 			local ui   = require("harpoon.ui")
 		end,
 	}
+
+	---------------------------------------------------------------------------
+	-- Avante
+	---------------------------------------------------------------------------
+	-- Required plugins
+	use 'nvim-lua/plenary.nvim'
+	use 'MunifTanjim/nui.nvim'
+	use 'MeanderingProgrammer/render-markdown.nvim'
+
+	-- Optional dependencies
+	use 'hrsh7th/nvim-cmp'
+	use 'nvim-tree/nvim-web-devicons' -- or use 'echasnovski/mini.icons'
+	use 'HakonHarnes/img-clip.nvim'
+	use 'zbirenbaum/copilot.lua'
+	use 'stevearc/dressing.nvim' -- for enhanced input UI
+	use 'folke/snacks.nvim' -- for modern input UI
+
+	-- Avante.nvim with build process
+	use {
+		'yetone/avante.nvim',
+		branch = 'main',
+		run = 'make',
+		--config = function()
+		--	require("avante").setup({
+		--		-- Input UI (fine as-is)
+		--		input = {
+		--			provider = "snacks",
+		--			provider_opts = {
+		--				title = "Avante Input",
+		--				icon = " ",
+		--				placeholder = "Enter your API key...",
+		--			},
+		--		},
+
+		--		-- ✅ Explicit default provider
+		--		provider = "openai",
+
+		--		-- ✅ Explicit provider table
+		--		providers = {
+		--			-- 🚫 Disable Claude entirely
+		--			claude = {
+		--				enabled = false,
+		--			},
+
+		--			-- ✅ Enable OpenAI explicitly
+		--			openai = {
+		--				enabled = true,
+		--				endpoint = "https://api.openai.com/v1",
+		--				model = "gpt-4o",
+		--				timeout = 30000,
+		--				extra_request_body = {
+		--					temperature = 0,
+		--					max_tokens = 4096,
+		--				},
+		--			},
+		--		},
+		--	})
+		--end
+	}
 end)
