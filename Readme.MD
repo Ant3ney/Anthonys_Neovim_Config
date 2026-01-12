@@ -9,6 +9,12 @@ make
 
 Don't run it. It will make avante ignore your config files. If you run it, go to the ~/.config dir and delete the avante.nvim or whatever config file there is. Run packer sync again and avante will listen to you configs in the after dir or the packer install file
 
+Also make sure to set your open ai API key
+```bash
+export AVANTE_OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxx"
+```
+
+
 # Feature TODO list
 - [x] Basic c++ LSP  
 - [X] Command to generate Unreal Engine and Project source awareness in LSP
