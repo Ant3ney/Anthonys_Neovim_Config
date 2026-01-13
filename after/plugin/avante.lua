@@ -24,15 +24,17 @@ require("avante").setup({
     openai = {
       enabled = true,
       endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o",
+      model = "gpt-5.2",
       timeout = 30000,
-      extra_request_body = {
-        temperature = 0,
-        max_tokens = 4096,
-      },
     },
+    behaviour = {
+	    use_cwd_as_project_root = true,
+    },
+
   },
 })
+
+vim.g.root_spec = { "cwd" } 
 
 vim.api.nvim_create_user_command("Avgpt", function()
 	require("avante.api").switch_provider("openai")

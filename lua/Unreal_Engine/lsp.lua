@@ -7,26 +7,36 @@ caps.textDocument.completion.editsNearCursor = true
 -- 2) Augment with nvim-cmp’s defaults (keeps what you set above)
 caps = require('cmp_nvim_lsp').default_capabilities(caps)
 
-vim.lsp.config('clangd', {
-  cmd = {
-    [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\clangd.exe]],
-    '--background-index',
-    '--clang-tidy',
-    '--header-insertion=never',
-    '--completion-style=detailed',
-    '--all-scopes-completion',
-    '--compile-commands-dir=DevSpace/Anthony',
-    '--log=verbose',
-    -- MSVC/clang-cl discovery so system includes are resolved:
-    '--query-driver=C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/MSVC/*/bin/**/cl.exe;C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/Llvm/bin/clang-cl.exe;C:/Program Files/LLVM/bin/clang-cl.exe',
-    "--background-index",         -- build & persist project-wide index
-  "--pch-storage=disk",         -- cache preambles on disk across sessions
+local is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 
-    -- Use this ONLY if your DB is not at the project root:
-    -- '--compile-commands-dir=C:/Users/antho/Desktop/AnthonysFolder/Games/pvh_landing/div/03/PVH',
-  },
-  filetypes = { 'c','cpp','objc','objcpp','h','hpp','hxx','hh','cc','cxx' },
-  root_markers = { 'compile_commands.json', '*.uproject', '.git', '.clangd' },
+local clangd_cmd = is_windows
+  and [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\clangd.exe]]
+  or "clangd"
+
+local clangd_args = {
+  "--background-index", -- build & persist project-wide index
+  "--pch-storage=disk", -- cache preambles on disk across sessions
+  "--clang-tidy",
+  "--header-insertion=never",
+  "--completion-style=detailed",
+  "--all-scopes-completion",
+  "--log=verbose",
+}
+
+-- Only meaningful on Windows/MSVC setups.
+if is_windows then
+  table.insert(clangd_args, "--compile-commands-dir=DevSpace/Anthony")
+  -- MSVC/clang-cl discovery so system includes are resolved:
+  table.insert(
+    clangd_args,
+    "--query-driver=C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/MSVC/*/bin/**/cl.exe;C:/Program Files/Microsoft Visual Studio/2022/*/VC/Tools/Llvm/bin/clang-cl.exe;C:/Program Files/LLVM/bin/clang-cl.exe"
+  )
+end
+
+vim.lsp.config("clangd", {
+  cmd = vim.list_extend({ clangd_cmd }, clangd_args),
+  filetypes = { "c", "cpp", "objc", "objcpp", "h", "hpp", "hxx", "hh", "cc", "cxx" },
+  root_markers = { "compile_commands.json", "*.uproject", ".git", ".clangd" },
   capabilities = caps,
 })
 

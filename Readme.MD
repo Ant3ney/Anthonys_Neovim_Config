@@ -1,5 +1,16 @@
 # Anthonys Nvim Config 
 
+
+## Docker dev environment
+
+A Docker image definition is included under `docker/`.
+
+- Build: `docker build -f docker/Dockerfile -t anthony-nvim:latest .`
+- Run: `docker run --rm -it anthony-nvim:latest`
+- Persist plugins: `docker volume create nvim-data && docker run --rm -it -v nvim-data:/home/dev/.local/share/nvim anthony-nvim:latest`
+
+More details: `docker/README.md`
+
 ## Avante
 AI will tell you to run this...
 ```bash
